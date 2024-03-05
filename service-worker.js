@@ -42,8 +42,6 @@ self.addEventListener('fetch', function(evt) {
   // ...and waitUntil() to prevent the worker to be killed until the cache is updated.
   evt.waitUntil(
     update(evt.request)
-    // Finally, send a message to the client to inform it about the resource is up to date.
-    //.then(refresh)
   );
 });
 
@@ -61,24 +59,6 @@ function update(request) {
       return cache.put(request, response.clone()).then(function() {
         return response;
       });
-    });
-  });
-}
-
-// Sends a message to the clients.
-function refresh(response) {
-  return self.clients.matchAll().then(function(clients) {
-    clients.forEach(function(client) {
-      // Encode which resource has been updated. By including the ETag the client can check if the content has changed.
-      var message = {
-        type: 'refresh',
-        url: response.url,
-        // Notice not all servers return the ETag header. If this is not provided you should use other cache headers or rely on your own means to check if the content has changed.
-        eTag: response.headers.get('ETag')
-      };
-
-      // Tell the client about the update.
-      client.postMessage(JSON.stringify(message));
     });
   });
 }
