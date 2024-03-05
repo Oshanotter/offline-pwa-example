@@ -1,0 +1,23 @@
+{
+  "name": "Updating Offline PWA Example",
+  "short_name": "PWA Example",
+  "description": "This is an example of an offline Progressive Web App that will automatically update every time you visit, unless you are offline.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icons/masked.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/full.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

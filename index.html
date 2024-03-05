@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1, initial-scale=1, minimal-ui, viewport-fit=cover">
+    <title>PWA Example</title>
+    <!--- You can replace the styles.css file with your own styles --->
+    <!--- You may also change aspects of the manifest.json file, but it is needed for the PWA to work --->
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="styles.css">
+
+    <!--- Declare the icons for the webpage --->
+    <link rel="icon" href="icons/masked.png" />
+    <link rel="apple-touch-icon" href="icons/full.png">
+    <link rel="mask-icon" href="icons/masked.png" color="#000000">
+</head>
+
+<body>
+
+    <!--- The body of your html can go here --->
+    <h2>The indecator below shows if you are online of offline.</h2>
+    <h2>Go offline and try to reload the page, it should still load perfectly fine!</h2>
+
+    <div class="container">
+        <h1>Online/Offline Status</h1>
+        <p id="status">Checking status...</p>
+    </div>
+
+    <div class="bottom">
+        <div class="explanation">
+            <h2>How it works...</h2>
+            <h4>
+                This page, after loading it for the first time, will continue to be able to be loaded even while offline.
+                <br>
+                This will continue to be the case until you clear the browser's cache. However, if you install this webpage as a PWA, it will have its own cache, and the clearing of the browser's cache will not affect it.
+                <br>
+                <br>
+                Every subsequential visit to this site will load from the cache while also attempting to load from the internet in the background.
+                <br>
+                This means that in order to update the PWA with new content from the web, you must load the PWA by opening it, thn close it, and open it again.
+            </h4>
+            <br>
+            <h2>Requirements...</h2>
+            <h4>
+                You first will want to clone <a href="https://github.com/Oshanotter/offline-pwa-example" target="_blank">this repository</a> and change certain aspects about the index.html, styles.css, and script.js files that you want.
+                <br>
+                Then you can focus on which pages to cache.
+                <br>
+                <br>
+                In order to cache your own pages, you must change the list of <span class="highlight">PRECACHE_URLS</span> found in the <span class="highlight">service-worker.js</span> file.
+                <br>
+                Any file that you have in that list will automatically be cached and updated when neded.
+                <br>
+                That should be the only aspect you should change in the service-worker.js file.
+                <br>
+                <br>
+                Additionally, you may want to change certain aspects of the <span class="highlight">manifest.json</span> file.
+                <br>
+                These aspects are pretty self explanitory, but they are used in case someone tries to install your website as a PWA.
+            </h4>
+        </div>
+    </div>
+
+
+    <!--- I place the script tags here so that they load after the html --->
+    <!--- The first tag you need for the PWA to work, you can put your own code into the script.js file though --->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>
