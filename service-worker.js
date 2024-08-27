@@ -37,6 +37,10 @@ self.addEventListener('activate', event => {
 
 // On fetch, use cache but update the entry with the latest contents from the server.
 self.addEventListener('fetch', function(evt) {
+  // If the request doesn't come from the same origin as the referrer, don't store it
+  if (!evt.request.url.includes(evt.request.referrer)){
+    return; // You can also remove the return statement if you want every request to be cached
+  }
   // You can use respondWith() to answer ASAP…
   evt.respondWith(fromCache(evt.request));
   // ...and waitUntil() to prevent the worker to be killed until the cache is updated.
